@@ -46,4 +46,10 @@ export class UserSpendingDataService {
       })
     );
   }
+
+  updateMiscSpending(newMiscSpending: number): Observable<UserSpending> {
+    return this.http.patch<UserSpending>(this.baseUrl, {
+      misc_spending_month: newMiscSpending,
+    })
+  }
 }
