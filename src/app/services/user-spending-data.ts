@@ -16,6 +16,7 @@ export class UserSpendingDataService {
   getUserSpendingSummary(): Observable<UserSpending> {
     return this.http.get<any>(this.baseUrl).pipe(
       map(data => {
+        // Use interface to ensure no unknown objects.
         interface CardData {
           name: string;
           spending: number;
@@ -26,7 +27,7 @@ export class UserSpendingDataService {
         // Convert the 'cards' objects into an array of Card instances safely.
         const cards: Card[] = Object.entries(data.cards)
           .filter((entry): entry is [string, CardData] => {
-            const [key, card_data] = entry;  // Destructure entry.
+            const [key, card_data] = entry;
             return (
               typeof card_data === 'object' &&
               card_data !== null &&
@@ -40,7 +41,7 @@ export class UserSpendingDataService {
         return new UserSpending(
           data.spending_ytd,
           data.spending_month,
-          data.misc_spending_month,
+          data.misc_spending,
           cards
         );
       })
@@ -49,7 +50,7 @@ export class UserSpendingDataService {
 
   updateMiscSpending(newMiscSpending: number): Observable<UserSpending> {
     return this.http.patch<UserSpending>(this.baseUrl, {
-      misc_spending_month: newMiscSpending,
+      misc_spending: newMiscSpending,
     })
   }
 }

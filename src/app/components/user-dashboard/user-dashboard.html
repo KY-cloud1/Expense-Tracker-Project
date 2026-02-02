@@ -7,7 +7,7 @@
 
 <div class="misc-stats">
     <h1>Non-Card Spending</h1>
-    <p>Miscellaneous this month: {{ miscSpendingDisplay | currency }}</p>
+    <p>Year-to-Date: {{ miscSpendingDisplay | currency }}</p>
 
     <input type="text" [formControl]="miscValueControl" placeholder="Update misc spending" />
     <button type="button" (click)="handleMiscSpendCancel()">Cancel</button>
