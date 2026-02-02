@@ -24,6 +24,8 @@ export class UserSpendingDataService {
           imageUrl: string;
         }
 
+        let totalCardSpendYtd = 0;
+
         // Convert the 'cards' objects into an array of Card instances safely.
         const cards: Card[] = Object.entries(data.cards)
           .filter((entry): entry is [string, CardData] => {
@@ -35,13 +37,30 @@ export class UserSpendingDataService {
               'spending' in card_data
             );
           })
-          .map(([key, card_data]) => new Card(key, card_data.name,
-            card_data.spending, card_data.limit, card_data.imageUrl));
+          .map(([key, card_data]) => {
+            totalCardSpendYtd += card_data.spending;
+
+            return new Card(
+              key,
+              card_data.name,
+              card_data.spending,
+              card_data.limit,
+              card_data.imageUrl
+            );
+          });
+
+        const miscSpend = data.misc_spending
+        const totalSpendYtd = totalCardSpendYtd + miscSpend
+
+        // Calculate monthly spend based on the current month.
+        const currDate = new Date();
+        const currMonthIndex = currDate.getMonth();
+        const monthlySpend = totalSpendYtd / (currMonthIndex + 1)
 
         return new UserSpending(
-          data.spending_ytd,
-          data.spending_month,
-          data.misc_spending,
+          totalSpendYtd,
+          monthlySpend,
+          miscSpend,
           cards
         );
       })
@@ -51,6 +70,6 @@ export class UserSpendingDataService {
   updateMiscSpending(newMiscSpending: number): Observable<UserSpending> {
     return this.http.patch<UserSpending>(this.baseUrl, {
       misc_spending: newMiscSpending,
-    })
+    });
   }
 }
