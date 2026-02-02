@@ -47,7 +47,7 @@ export class UserDashboardComponent implements OnInit {
     }
 
     const updatedMiscSpending =
-      this.userSpending.misc_spending_month + miscUpdateDelta;
+      this.userSpending.misc_spend + miscUpdateDelta;
 
     this.userSpendingDataService.updateMiscSpending(updatedMiscSpending)
       .subscribe({
@@ -65,6 +65,6 @@ export class UserDashboardComponent implements OnInit {
     if (!this.userSpending) return 0;
 
     const miscDelta = Number(this.miscValueControl.value ?? 0)
-    return this.userSpending.misc_spending_month + miscDelta;
+    return this.userSpending.misc_spend + miscDelta;
   }
 }
