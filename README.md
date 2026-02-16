@@ -1,59 +1,104 @@
-# ExpenseTrackerApp
+# Angular Expense Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+A lightweight expense-tracking dashboard built with Angular. This project tracks year-to-date spending, average monthly spending, credit card usage, and miscellaneous expenses using a simple REST backend.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
 
-```bash
-ng serve
+- **Spending Summary**
+  - Year-to-date total spending
+  - Average monthly spending (calculated dynamically)
+
+- **Credit Card Tracking**
+  - View card spending vs. limits
+  - Incrementally update card spending
+  - Incrementally update card limits
+  - Card images rendered with optimized loading
+
+- **Miscellaneous Spending**
+  - Track non-card expenses
+  - Update misc spending using deltas (add or subtract)
+
+- **Modern Angular Patterns**
+  - Standalone components
+  - Reactive Forms
+  - HTTP services with RxJS
+
+---
+
+## Tech Stack
+
+- Frontend: Angular
+- Backend: JSON Server
+- Styling: CSS (Flexbox)
+- Data: RxJS, Angular HttpClient
+
+---
+
+## Project Structure (Key Files)
+
+```text
+src/
+├── app/
+│   ├── components/
+│   │   └── user-dashboard/
+│   │       ├── user-dashboard.ts
+│   │       ├── user-dashboard.html
+│   │       └── user-dashboard.css
+│   ├── models/
+│   │   ├── card.ts
+│   │   └── user-spending.ts
+│   ├── services/
+│   │   └── user-spending-data.ts
+│   └── app.config.ts
+├── assets/
+│   │   └── card_pngs/
+├── db.json
+└── main.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## How It Works
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- The `UserDashboardComponent` fetches spending data on initialization.
+- Backend data is mapped into typed `UserSpending` and `Card` models.
+- Reactive form controls allow incremental updates to spending and limits.
+- The UI previews changes before submission.
+- Updates are persisted via PATCH requests to the backend.
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Backend Setup
 
-```bash
-ng generate --help
-```
+This project expects a local REST API running at:
 
-## Building
+    http://localhost:3000/userSpending
 
-To build the project run:
+### Start JSON Server
 
-```bash
-ng build
-```
+    npm install -g json-server
+    json-server --watch db.json --port 3000
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
+## Run the App
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+    npm install
+    ng serve
 
-```bash
-ng test
-```
+Then open:
 
-## Running end-to-end tests
+    http://localhost:4200
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
+## Current Limitations
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Single-user demo (no authentication)
+- No ability to add or remove cards
+- No transaction history
+- `Card Paid` button not implemented
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
