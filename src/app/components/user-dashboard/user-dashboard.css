@@ -28,6 +28,15 @@
   margin-bottom: 2.5rem;
 }
 
+.update-card-btn {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.update-card-btn:hover {
+  background-color: #929292;
+}
+
 .pay-card-btn {
   display: block;
   margin: 12px auto 0;
@@ -43,5 +52,5 @@
 }
 
 .pay-card-btn:hover {
-  background-color: #45a049;
+  background-color: #337336;
 }

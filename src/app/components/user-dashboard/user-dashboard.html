@@ -10,8 +10,8 @@
     <p>Year-to-Date: {{ miscSpendingDisplay | currency }}</p>
 
     <input type="text" [formControl]="miscValueControl" placeholder="Update misc spending" />
-    <button type="button" (click)="handleMiscSpendCancel()">Cancel</button>
-    <button type="button" (click)="handleMiscSpendSubmit()">Update</button>
+    <button type="button" (click)="handleMiscSpendCancel()" class="update-card-btn">Cancel</button>
+    <button type="button" (click)="handleMiscSpendSubmit()" class="update-card-btn">Update</button>
 </div>
 
 <div class="cards-stats">
@@ -24,12 +24,12 @@
             <p>{{ cardSpendingDisplay(card) | currency }} / {{ cardLimitDisplay(card) | currency }}</p>
 
             <input type="text" [formControl]="cardControls[card.key].spending" placeholder="Update card spending" />
-            <button type="button" (click)="handleCardCancel(card)">Cancel</button>
-            <button type="button" (click)="handleCardSpendSubmit(card)">Update</button>
+            <button type="button" (click)="handleCardCancel(card)" class="update-card-btn">Cancel</button>
+            <button type="button" (click)="handleCardSpendSubmit(card)" class="update-card-btn">Update</button>
 
             <input type="text" [formControl]="cardControls[card.key].limit" placeholder="Update card limit" />
-            <button type="button" (click)="handleCardCancel(card)">Cancel</button>
-            <button type="button" (click)="handleCardLimitSubmit(card)">Update</button>
+            <button type="button" (click)="handleCardCancel(card)" class="update-card-btn">Cancel</button>
+            <button type="button" (click)="handleCardLimitSubmit(card)" class="update-card-btn">Update</button>
             <button type="button" (click)="handleCardPaid(card)" class="pay-card-btn">Pay Card</button>
         </li>
         }
