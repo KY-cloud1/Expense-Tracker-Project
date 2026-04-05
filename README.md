@@ -70,25 +70,25 @@ src/
 
 ---
 
-## Backend Setup
+## Dashboard Setup
 
-This project expects a local REST API running at:
+### 1. Install Dependencies
+
+    npm install
+
+### 2. Start the Backend (in a separate terminal)
+
+    npm run api
+
+This project will expect a local REST API running at:
 
     http://localhost:3000/userSpending
 
-### Start JSON Server
+### 3. Start the Frontend
 
-    npm install -g json-server
-    json-server --watch db.json --port 3000
+    npm start
 
----
-
-## Run the App
-
-    npm install
-    ng serve
-
-Then open:
+### Then open:
 
     http://localhost:4200
 
@@ -99,6 +99,5 @@ Then open:
 - Single-user demo (no authentication)
 - No ability to add or remove cards
 - No transaction history
-- `Card Paid` button not implemented
 
 ---
